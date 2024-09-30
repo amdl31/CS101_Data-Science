@@ -10,7 +10,7 @@ output:
 age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 35, 24, 33, 41)
 
 length(age)
-
+ 
 1 / age
 
 new_age <- c(age, 0, age)
@@ -38,10 +38,6 @@ sum(seq(51, 91))
 
 seq(1, 1000)
 
-seq(1, 100)
-
-seq(20, 60)
-
 mean(seq(20, 60))
 
 seq(1, 1000)[1:10]
@@ -52,19 +48,17 @@ filtered_integers
 multiples <- c(seq(3, 24, by=3), seq(5, 20, by=5))
 unique(multiples)
 
-sum(unique(multiples))
-
 rev(seq(1, 100))
 
 multiples <- c(seq(3, 24, by=3), seq(5, 20, by=5))
 unique(multiples)
-
 sum(unique(multiples))
 
 x <- {0 + x + 5 + }
 
 score <- c(72, 86, 92, 63, 88, 89, 91, 92, 75, 75, 77)
 score[2]
+
 
 score[3]
 
