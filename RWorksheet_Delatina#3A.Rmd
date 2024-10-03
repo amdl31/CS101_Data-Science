@@ -1,0 +1,137 @@
+---
+title: "RWorksheet_Delatina#3A.Rmd"
+author: "Angel"
+date: "2024-10-01"
+output:
+  pdf_document: default
+  html_document: default
+---
+#1A
+```{r}
+first_11_letters <- LETTERS[1:11]
+first_11_letters
+
+```
+#1B
+```{r}
+odd_letters <- LETTERS [seq(1,26, by=2)]
+odd_letters
+```
+#1C
+```{r}
+vowels <- LETTERS[c(1,5,9,15,21)]
+vowels
+```
+#1D
+```{r}
+last_5_letter <- letters [22:26]
+last_5_letter
+```
+#1E
+```{r}
+letter_15_to_24 <- letters[15:24]
+letter_15_to_24
+```
+#2A
+```{r}
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+city
+
+```
+#2B
+```{r}
+temp <- c(42, 39, 34, 34, 30, 27)
+temp
+
+```
+#2C
+```{r}
+weather_data <- data.frame(City = city, Temperature = temp)
+weather_data
+
+```
+#2D
+```{r}
+names(weather_data) <- c("City", "Temperature")
+weather_data
+
+```
+#2E
+```{r}
+str(weather_data)
+
+```
+#2F
+```{r}
+weather_data[3:4, ]
+
+```
+#2G
+```{r}
+highest_temp_city <- weather_data[which.max(weather_data$Temperature), "City"]
+lowest_temp_city <- weather_data[which.min(weather_data$Temperature), "City"]
+highest_temp_city
+lowest_temp_city
+
+```
+A
+```{r}
+matrix_data <- matrix(c(1:8, 11:14), nrow = 3, ncol = 4)
+matrix_data
+
+```
+B
+```{r}
+matrix_times_2 <- matrix_data * 2
+matrix_times_2
+
+```
+C
+```{r}
+matrix_data[2, ]
+
+```
+D
+```{r}
+matrix_data[1:2, 3:4]
+
+```
+E
+```{r}
+matrix_data[3, 2:3]
+
+```
+F
+```{r}
+matrix_data[, 4]
+
+```
+G
+```{r}
+rownames(matrix_data) <- c("isa", "dalawa", "tatlo")
+colnames(matrix_data) <- c("uno", "dos", "tres", "quatro")
+matrix_data
+
+```
+H
+```{r}
+dim(matrix_data)<- c (6,2)
+matrix_data
+```
+#3A
+```{r}
+array_values <- c (1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+array_data <- array(rep(array_values, 2), dim = c(2, 4, 3))
+array_data
+```
+#3B
+```{r}
+dim(array_data)
+```
+#3C
+```{r}
+dimnames(array_data) <- list(c("a", "b"), c("A", "B", "C", "D"), c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array"))
+array_data
+
+```
+
