@@ -1,0 +1,247 @@
+---
+title: "RWorksheet_Delatina#4b"
+author: "Angel"
+date: "2024-10-28"
+output: pdf_document
+---
+#1
+```{r}
+vector <- c(1, 2, 3, 4, 5)
+
+matrix <- matrix(0, nrow = 5, ncol = 5)
+
+
+final_matrix <- matrix(0, nrow = 5, ncol = 5)
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    final_matrix[i, j] <- abs(vector[i] - vector[j])
+  }
+}
+
+final_matrix
+
+```
+#2
+```{r}
+for (i in 1:5){
+  for (j in 1:i){
+    cat("*")
+  }
+  cat("\n")
+}
+    
+```
+#3
+
+```{r}
+generate_fibonacci <- function(start) {
+  fib1 <- 0
+  fib2 <- 1
+  fib_seq <- c()
+
+  repeat {
+    fib_next <- fib1 + fib2
+    
+    fib1 <- fib2
+    fib2 <- fib_next
+    
+    if (fib_next > 500) {
+      break
+    }
+  
+    if (!is.na(fib_next) && fib_next >= start) {
+      fib_seq <- c(fib_seq, fib_next)
+    }
+  }
+  
+  return(fib_seq)
+}
+
+start_value <- as.numeric(readline(prompt = "Enter a starting number for the Fibonacci sequence: "))
+
+
+if (is.na(start_value) || start_value < 0) {
+  cat("Please enter a valid non-negative number.\n")
+} else {
+
+  fibonacci_sequence <- generate_fibonacci(start_value)
+  
+
+  cat("Fibonacci sequence starting from", start_value, "up to 500:\n")
+  print(fibonacci_sequence)
+}
+
+```
+
+
+#4
+```{r}
+data<- read.csv("C:/Documents/RBasics/RWorksheet_Delatina#4B/shoesize.csv")
+head(data)
+```
+```{r}
+data <- read.csv("C:/Documents/RBasics/RWorksheet_Delatina#4B/shoesize.csv")
+head(data)
+
+```
+
+#4b
+```{r}
+male_data <- subset(data, Gender == "M")
+female_data <- subset(data, Gender == "F")
+
+num_males <- nrow(male_data)
+num_females <- nrow(female_data)
+
+cat("Number of Male observations:", num_males, "\n")
+cat("Number of Female observations:", num_females, "\n")
+
+
+```
+#4c
+```{r}
+gender_counts <- c(Male = num_males, Female = num_females)
+
+barplot(gender_counts,
+        main = "Number of Males and Females in Household Data",
+        xlab = "Gender",
+        ylab = "Count",
+        col = c("blue", "pink"),
+        legend = names(gender_counts),
+        args.legend = list(x = "topright"))
+
+```
+#5
+```{r}
+expenses <- c(60, 10, 5, 25)
+labels <- c("Food", "Electricity", "Savings", "Miscellaneous")
+colors <- c("lightblue", "lightgreen", "lightpink", "lightyellow")
+
+pie(expenses, 
+    labels = paste(labels, round(expenses/sum(expenses) * 100, 1), "%"),
+    col = colors,
+    main = "Dela Cruz Family Monthly Income Distribution")
+
+
+```
+
+
+#6
+```{r}
+data(iris)
+
+str(iris)
+
+```
+#6b
+```{r}
+means <- colMeans(iris[, 1:4])
+means
+
+```
+#6c
+```{r}
+species_count <- table(iris$Species)
+colors <- c("red", "green", "blue")
+
+pie(species_count, 
+    labels = paste(names(species_count), round(species_count/sum(species_count) * 100, 1), "%"),
+    col = colors,
+    main = "Species Distribution in Iris Dataset")
+
+
+```
+#6d
+```{r}
+setosa <- iris[iris$Species == "setosa", ]
+versicolor <- iris[iris$Species == "versicolor", ]
+virginica <- iris[iris$Species == "virginica", ]
+
+last_rows_setosa <- tail(setosa, 6)
+last_rows_versicolor <- tail(versicolor, 6)
+last_rows_virginica <- tail(virginica, 6)
+
+list(Setosa = last_rows_setosa, Versicolor = last_rows_versicolor, Virginica = last_rows_virginica)
+
+```
+#6e
+```{r}
+iris$Species <- as.factor(iris$Species)
+
+plot(iris$Sepal.Length, iris$Sepal.Width,
+     col = iris$Species, pch = 19,
+     main = "Iris Dataset",
+     sub = "Sepal Width and Length",
+     xlab = "Sepal Length",
+     ylab = "Sepal Width")
+
+legend("topright", legend = levels(iris$Species), col = 1:3, pch = 19)
+
+
+```
+#7
+```{r}
+library(readxl)
+data <-read_excel("C:/Documents/RBasics/RWorksheet_Delatina#4B/alexa_file.xlsx")
+
+data$variation <- gsub("Black Dots", "Black Dots", data$variation)
+data$variation <- gsub("White Plus", "White Plus", data$variation)
+
+head(data$variation)
+```
+```{r}
+library(dplyr)
+```
+
+#7b
+
+```{r}
+variation_count <- data%>%
+  count(variation)
+save(variation_count, file = "variations.RData")
+print(variation_count)
+```
+
+
+#7c
+```{r}
+load("variations.RData")
+
+barplot(variation_count$n,
+        names.arg = variation_count$variation,
+        col = "lightblue",
+        main = "Variation Counts in Alexa Data",
+        xlab = "Variations",
+        ylab = "Count",
+        las = 2,  
+        cex.names = 0.8)
+
+
+
+```
+#7d
+```{r}
+black_variations <- variation_count %>% filter(grepl("Black", variation))
+white_variations <- variation_count %>% filter(grepl("White", variation))
+
+black_counts <- setNames(black_variations$n, gsub("Black ", "", black_variations$variation))
+white_counts <- setNames(white_variations$n, gsub("White ", "", white_variations$variation))
+
+common_variations <- c("Dot", "Plus", "Show", "Spot")
+black_counts <- black_counts[common_variations]
+black_counts[is.na(black_counts)] <- 0
+white_counts <- white_counts[common_variations]
+white_counts[is.na(white_counts)] <- 0
+
+barplot_matrix <- rbind(black_counts, white_counts)
+
+barplot(barplot_matrix, beside = TRUE, col = c("purple", "blue"),
+        main = "Count of Black and White Variations",
+        xlab = "Variation Type", ylab = "Count",
+        legend = rownames(barplot_matrix), args.legend = list(x = "topright"))
+
+```
+
+
+

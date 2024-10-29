@@ -1,0 +1,19 @@
+---
+title: "RWorksheet_Delatina#3A"
+author: "Angel"
+date: "2024-09-30"
+output: pdf_document
+---
+```{r}
+first_11_letters <- letters[1:11]
+first_11_letters
+```
+```{r}
+odd_letters <-letters[seq(1, 26, by=2)]
+odd_letters
+```
+```{r}
+vowels <- letters[c(1,5,9,15,21)]
+vowels
+```
+
