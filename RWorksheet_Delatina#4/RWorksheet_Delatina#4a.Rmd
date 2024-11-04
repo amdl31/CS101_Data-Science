@@ -1,0 +1,72 @@
+---
+title: "RWorksheet_Delatina#4a"
+author: "Angel"
+date: "2024-10-14"
+output: pdf_document
+---
+1A
+```{r}
+data <- data.frame(
+Shoe_Size = c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5, 10.5, 8.5, 12.0, 10.5, 13.0, 11.5, 8.5, 5.0, 10.0, 6.5, 7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0),
+Height = c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0, 74.75, 67.0, 71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0, 64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0),
+Gender = c("F", "F", "F", "F", "M", "F", "F", "F", "M", "F", "M", "F", "M", "M", "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M", "M", "M")
+)
+data
+
+
+```
+1B
+```{r}
+females <- subset(data, Gender == "F", select = c(Shoe_Size, Height))
+females
+```
+```{r}
+males <- subset(data, Gender == "M", select = c(Shoe_Size, Height))
+males
+```
+
+1C
+```{r}
+mean_Shoe_Size <- mean(data$Shoe_Size)
+mean_Shoe_Size
+mean_Height <- mean(data$Height)
+mean_Height
+```
+
+2
+```{r}
+Months <- c("March", "April", "JAnuary", "November", "January", "September", "October", "September", "November", "August", "January", "November", "November", "Febraury", "May", "August")
+factor_Months <- factor(Months)
+factor_Months
+
+```
+3
+```{r}
+summary(Months)
+summary(factor_Months)
+```
+
+
+
+#4
+```{r}
+Direction <- c("East", "West", "North")
+Direction
+Frequency <- c(1L, 4L, 3L)
+Frequency
+```
+```{r}
+factor_Direction <- factor(Direction)
+factor_Direction
+
+factor_Frequency <- factor(Frequency)
+factor_Frequency
+```
+#5
+```{r}
+data <- read.table("C:/Documents/RBasics/Worksheet4/import_march.csv", header =TRUE, sep =",",stringsAsFactors = FALSE)
+head(data)
+```
+
+
+

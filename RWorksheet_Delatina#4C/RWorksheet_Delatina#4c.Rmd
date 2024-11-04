@@ -1,0 +1,227 @@
+---
+title: "RWorksheet_Delatina#4c"
+author: "Angel"
+date: "2024-11-01"
+output:
+  pdf_document: default
+  word_document: default
+---
+#1
+```{r}
+mpg_data<- read.csv("C:/Documents/RBasics/RWorksheet_Delatina#4C/mpg.csv")
+mpg_data
+```
+
+#1b
+```{r}
+str(mpg_data)
+
+```
+
+#2
+```{r}
+library(dplyr)
+manufacturer_count <- mpg_data %>%
+  group_by(manufacturer) %>%
+  summarise(model_count = n_distinct(model)) %>%
+  arrange(desc(model_count))
+
+most_models <- manufacturer_count[1,]
+most_models
+
+```
+```{r}
+model_variation <- mpg_data %>%
+  group_by(model) %>%
+  summarise(variation_count = n()) %>%
+  arrange(desc(variation_count))
+
+most_variations <- model_variation[1,]
+most_variations
+
+```
+#2b
+```{r}
+unique_models_by_manufacturer <- mpg_data %>%
+  group_by(manufacturer) %>%
+  summarise(unique_models = n_distinct(model))
+
+unique_models_by_manufacturer
+
+
+```
+```{r}
+barplot(unique_models_by_manufacturer$unique_models,
+        names.arg = unique_models_by_manufacturer$manufacturer,
+        las = 2, col = "blue",
+        main = "Unique Models per Manufacturer",
+        ylab = "Number of Unique Models")
+
+```
+```{r}
+library(ggplot2)
+
+ggplot(unique_models_by_manufacturer, aes(x = reorder(manufacturer, -unique_models), y = unique_models)) +
+  geom_bar(stat = "identity", col = "gray") +
+  labs(title = "Unique Models per Manufacturer", x = "Manufacturer", y = "Number of Unique Models") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+```{r}
+ggplot(mpg_data, aes(x = model, y = manufacturer)) +
+  geom_jitter(width = 0.3, height = 0.3) +
+  labs(title = "Relationship between Model and Manufacturer", x = "Model", y = "Manufacturer")
+
+ggplot(mpg_data, aes(x = model, y = manufacturer)) +
+  geom_count() +
+  labs(title = "Relationship between Model and Manufacturer", x = "Model", y = "Manufacturer")
+
+```
+```{r}
+
+```
+
+
+
+
+
+#3
+```{r}
+top_20_mpg <- mpg_data %>% top_n(20)
+
+ggplot(top_20_mpg, aes(x = model, y = year)) +
+  geom_point() +
+  labs(title = "Top 20 Car Models Over Years", x = "Model", y = "Year")
+
+```
+#4
+```{r}
+cars_per_model <- mpg_data %>%
+  group_by(model) %>%
+  summarise(count = n())
+
+cars_per_model
+```
+#4a
+```{r}
+ggplot(cars_per_model %>% top_n(20), aes(x = reorder(model, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "green") +
+  labs(title = "Top 20 Models by Count", x = "Model", y = "Count") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+#4b
+```{r}
+
+ggplot(cars_per_model %>% top_n(20), aes(x = reorder(model, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  labs(title = "Top 20 Models by Count", x = "Model", y = "Count") +
+  coord_flip()
+
+
+```
+#5
+```{r}
+ggplot(mpg_data, aes(x = cyl, y = displ, color = displ)) +
+  geom_point() +
+  labs(title = "Relationship between No. of Cylinders and Engine Displacement")
+
+
+```
+#5b
+```{r}
+ggplot(mpg_data, aes(x = displ, y = hwy, color = cty)) +
+  geom_point() +
+  labs(title = "Relationship between Engine Displacement and Highway MPG")
+
+```
+
+
+
+
+
+#6
+```{r}
+traffic_data<- read.csv("C:/Documents/RBasics/RWorksheet_Delatina#4C/traffic.csv")
+dim(traffic_data) 
+str(traffic_data)
+
+```
+```{r}
+num_observations <- nrow(traffic_data)
+variables <- colnames(traffic_data)
+
+num_observations
+variables
+
+```
+
+#6b
+```{r}
+Junction <- traffic_data %>%
+  filter(Junction == "true") 
+
+head(Junction)
+
+
+
+```
+
+#6c
+```{r}
+library(ggplot2)
+ggplot(traffic_data, aes(x = as.POSIXct(DateTime), y = Vehicles, color = Junction)) +
+  geom_line() +
+  labs(title = "Traffic Count by Junction Over Time", x = "DateTime", y = "Number of Vehicles") +
+  theme_minimal()
+
+
+```
+```{r}
+colnames(traffic_data)  # Or colnames(junctions) if you're using the subset
+
+```
+
+#7
+```{r}
+library(readxl)
+alexa_data<-read_excel("C:/Documents/RBasics/RWorksheet_Delatina#4B/alexa_file.xlsx")
+dim(alexa_data)
+```
+#7b
+```{r}
+library(dplyr)
+
+variation_count <- alexa_data %>%
+  group_by(variation) %>%
+  summarise(total = n())
+
+variation_count
+
+```
+#7c
+```{r}
+ggplot(variation_count, aes(x = variation, y = total)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Count of Variations", x = "Variation", y = "Total Count")
+
+```
+#7d
+```{r}
+ggplot(alexa_data, aes(x = date, y = verified_reviews)) +
+  geom_line() +
+  labs(title = "Verified Reviews Over Time", x = "Date", y = "Number of Verified Reviews")
+geom_line
+```
+#7e
+```{r}
+ggplot(alexa_data, aes(x = variation, y = rating)) +
+  geom_point() +
+  labs(title = "Variation Ratings", x = "Variation", y = "Ratings")
+
+```
+
+
+
+
+

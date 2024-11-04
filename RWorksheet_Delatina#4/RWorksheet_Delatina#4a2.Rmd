@@ -1,0 +1,94 @@
+---
+title: "RWorksheet_Delatina#4a2"
+author: "Angel"
+date: "2024-10-28"
+output: pdf_document
+---
+
+```{r}
+  number <- is.na(as.numeric(readline(prompt = "Please enter a number between 1 and 50: ")))
+  
+  if (number < 1 || number > 50) {
+    print("The number selected is beyond the range of 1 to 50")
+  } else if (number == 20) {
+    print("TRUE")  
+  } else {
+    paste("The chosen number is:", number)  
+  }
+```
+```{r}
+minimum_bills <- function(price) {
+  bills <- c(1000, 500, 200, 100, 50)
+  num_bills <- 0
+  
+  for (bill in bills) {
+    num_bills <- num_bills + price %/% bill
+    price <- price %% bill
+  }
+  
+  cat("Minimum number of bills needed:", num_bills, "\n")
+}
+
+snack_price <- as.integer(readline(prompt = "Enter the price of the snack (divisible by 50): "))
+minimum_bills(snack_price)
+
+```
+```{r}
+students_data <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+
+students_data
+
+
+
+```
+
+```{r}
+for (i in 1:nrow(students_data)) {
+  scores <- as.numeric(students_data[i, 2:5])
+  total <- sum(scores)
+  avg_score <- total / length(scores)
+  
+  if (avg_score > 90) {
+    cat(students_data$Name[i], "'s average grade this semester is", avg_score, "\n")
+  }
+}
+
+
+
+
+```
+
+```{r}
+for (j in 2:5) {
+  total <- sum(students_data[[j]])
+  avg_score <- total / nrow(students_data)
+  
+  if (avg_score < 80) {
+    cat("The", j - 1, "th test was difficult.\n")
+  }
+}
+
+```
+
+```{r}
+
+for (i in 1:nrow(students_data)) {
+  scores <- as.numeric(students_data[i, 2:5])
+  highest_score <- sort(scores, decreasing = TRUE)[1]
+  
+  if (highest_score > 90) {
+    cat(students_data$Name[i], "'s highest grade this semester is", highest_score, "\n")
+  }
+}
+
+
+
+```
+
